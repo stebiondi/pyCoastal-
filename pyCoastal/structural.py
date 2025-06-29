@@ -75,3 +75,15 @@ def goda_wave_force(H: float, T: float, h: float, beta: float, rho: float = 1025
     F = p_max * z_limit  # N/m
 
     return F
+    
+def iribarren_stability(H: float, alpha: float, rho_s: float, rho_w: float, mu: float, N: float) -> float:
+    """
+    Stone weight W needed for armor stability per Iribarren:
+      W ≥ [N ρ_s g H^3] / [Δ^3 (μ cosα − sinα)^3]
+    where Δ = (ρ_s/ρ_w − 1), N is safety coefficient,
+    μ is friction coefficient, α is slope angle (rad).
+    """
+    Delta = rho_s/rho_w - 1
+    numerator = N * rho_s * 9.81 * H**3
+    denom = (Delta**3) * (mu * math.cos(alpha) - math.sin(alpha))**3
+    return numerator / denom
