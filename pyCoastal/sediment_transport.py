@@ -55,3 +55,19 @@ def bagnold_sediment(H: float, c: float, rho_s: float, rho: float = 1025) -> flo
     """
     return (rho_s / rho) * H**2 * c
 
+def izbash_current(rho_s: float, rho: float, d: float, g: float = 9.81) -> float:
+    """
+    Izbash critical current for stone stability:
+      u_c = 1.7 * sqrt[Δ g d]
+    """
+    Delta = (rho_s - rho) / rho
+    return 1.7 * sqrt(Delta * g * d)
+
+def einstein_bedload(tau_star: float, d: float, s: float, g: float = 9.81) -> float:
+    """
+    Einstein’s bedload formula (probabilistic):
+      q_b = 8 √[g (s − 1) d^3] * τ*^1.5
+    Useful for fine sand transport upstream.
+    """
+    return 8 * sqrt(g * (s - 1) * d**3) * tau_star**1.5
+
