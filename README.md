@@ -1,6 +1,6 @@
 # pyCoastal
 
-A Python module for common coastal engineering calculations.
+A Python module for Coastal Engineering calculations.
 
 Copyright (c) 2025 Stefano Biondi
 Licensed under the MIT License. See LICENSE file for details.
