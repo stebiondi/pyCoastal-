@@ -3,15 +3,6 @@
 import math
 from .wave_tools import surf_similarity
 
-def bruuns_rule(S: float, beta: float, L: float = None, h: float = None, B: float = None) -> float:
-    """
-    Estimate shoreline recession R using the Bruun rule.
-    R = S*L / (h + B) or S / tan(beta)
-    """
-    if L is not None and h is not None and B is not None:
-        return S * L / (h + B)
-    return S / math.tan(beta)
-
 def hudson_dn50(Hs: float, Delta: float, theta: float, Kd: float = 3.0) -> float:
     """
     Calculate nominal diameter Dn50 for armor stone using Hudson's formula.
