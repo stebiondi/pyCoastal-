@@ -1,8 +1,8 @@
 """
 pycoastal - A Python toolkit for coastal engineering computations.
+Stefano Biondi, UF
 """
 
-# Import selected functions for easy access from the package root
 from .wave_tools import (
     dispersion,
     wave_number,
@@ -11,7 +11,9 @@ from .wave_tools import (
     breaker_type
 )
 
+from .structure import (
+    bruuns_rule,
+    hudson_dn50,
+    vandermeer_dn50
+)
 
-# You can add more functions or submodules here as needed in the future
-# Example:
-# from .wave_energy import wave_power
