@@ -1,12 +1,21 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyCoastal"
 version = "0.1.0"
-description = "A coastal engineering utility library"
-authors = [{ name = "Stefano Biondi", email = "stefano.biondi@ufl.edu" }]
-license = "MIT"
+description = "A Python toolbox for coastal engineering"
+authors = [
+  { name="Stefano Biondi", email="stefano@example.com" }
+]
+license = { text = "MIT" }
 readme = "README.md"
-dependencies = ["numpy"]
+requires-python = ">=3.7"
+dependencies = []
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
