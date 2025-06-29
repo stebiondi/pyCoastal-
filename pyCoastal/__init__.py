@@ -8,10 +8,11 @@ from .wave_tools import (
     wave_number,
     surf_similarity,
     breaker_type,
-    ursell_number
+    ursell_number,
+    wave_setup
 )
 
-from .structure import (
+from .structural import (
     hudson_dn50,
     vandermeer_dn50,
     goda_wave_force,
@@ -24,9 +25,11 @@ from .morphodynamics import (
     exner_change
 )
 
-from .sediment import (
+from .sediment_transport import (
     shields_parameter,
     van_rijn_bedload,
     van_rijn_suspended,
-    bijker_bedload
+    bijker_bedload,
+    bagnold_sediment,
+    cerc_transport
 )
