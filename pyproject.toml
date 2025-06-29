@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyCoastal"
+version = "0.1.0"
+description = "A coastal engineering utility library"
+authors = [{ name = "Stefano Biondi", email = "stefano.biondi@ufl.edu" }]
+license = "MIT"
+readme = "README.md"
+dependencies = ["numpy"]
