@@ -29,6 +29,24 @@ def vandermeer_dn50(Hs: float, Delta: float, P: float, N: int, alpha: float, xi_
         denom = cs * (P**-0.13) * ((Hs / math.sqrt(N))**0.2) * math.sqrt(1/math.tan(alpha)) * (xi_m**P)
     return Hs / (Delta * denom)
     
+def hunt_runup(beta: float, H: float, L: float) -> float:
+    """
+    Hunt (1959) empirical run-up:
+    R ≈ H * (tan beta) / sqrt(H / L)
+    """
+    return H * np.tan(beta) / np.sqrt(H / L)
+
+def stockdon_runup(H: float, L: float, beta: float) -> float:
+    """
+    Stockdon et al. (2006) 2%-exceedance run-up:
+    R2 = 1.1*(0.35 H xi) + 0.55*(0.75 H xi)
+    where xi = tan beta / sqrt(H/L)
+    """
+    xi = np.tan(beta) / np.sqrt(H / L)
+    eta_u = 0.35 * H * xi
+    S_w = 0.75 * H * xi
+    return 1.1 * (eta_u + 0.5 * np.sqrt(S_w**2 + (0.06*np.sqrt(H*L))**2))
+    
 def goda_wave_force(H: float, T: float, h: float, beta: float, rho: float = 1025) -> float:
     """
     Estimate the Goda–Takahashi equivalent-static horizontal wave force per unit width (kN/m)
