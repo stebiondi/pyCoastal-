@@ -15,7 +15,7 @@ cd pyCoastal
 ```bash
 python -m venv venv
 ```
-Activate it:
+# Activate it:
 On Windows PowerShell:
 ```bash
 venv\Scripts\Activate.ps1
@@ -26,28 +26,28 @@ On Linux/macOS:
 source venv/bin/activate
 ```
 
-# 3. Install build tools
+# Install build tools
 ```bash
 pip install --upgrade pip setuptools wheel build
 ```
 
-Build your package (creates dist/ folder)
+# Build your package (creates dist/ folder)
 ```bash
 python -m build
 ```
 
-(Optional) Check your distribution packages
+# (Optional) Check your distribution packages
 ```bash
 pip install twine
 twine check dist/*
 ```
 
-Install pyCoastal in editable (dev) mode
+# Install pyCoastal in editable (dev) mode
 ```bash
 pip install -e 
 ```
 
-Test it in a Python session:
+# Test it in a Python session:
 ```bash
 python - <<EOF
 import pyCoastal as cs
@@ -55,9 +55,9 @@ print(cs.dispersion(T=8, h=5))
 EOF
 ```
 
-or soon available:
+# or soon available:
 
-Install via pip:
+# Install via pip:
 
 ```bash
 pip install pyCoastal
