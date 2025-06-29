@@ -14,7 +14,6 @@ def __getattr__(name):
         "Structure": pyCoastal.structural,
         "Morphodynamics": pyCoastal.morphodynamics,
         "Sediment Transport": pyCoastal.sediment_transport,
-        "Hydrodynamics": pyCoastal.hydrodynamics
     }
 
     available = []
