@@ -8,6 +8,7 @@ from .wave_tools import (
     wave_number,
     surf_similarity,
     ursell_number,
+    breaker_type
 )
 
 
