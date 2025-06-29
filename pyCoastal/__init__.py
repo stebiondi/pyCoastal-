@@ -3,7 +3,13 @@ pycoastal - A Python toolkit for coastal engineering computations.
 """
 
 # Import selected functions for easy access from the package root
-from .wave_tools import dispersion
+from .wave_tools import (
+    dispersion,
+    wave_number,
+    surf_similarity,
+    ursell_number,
+)
+
 
 # You can add more functions or submodules here as needed in the future
 # Example:
