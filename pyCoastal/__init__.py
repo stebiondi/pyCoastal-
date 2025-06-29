@@ -17,7 +17,8 @@ from .structural import (
     vandermeer_dn50,
     goda_wave_force,
     hunt_runup,
-    stockdon_runup
+    stockdon_runup,
+    iribarren_stability
 )
 
 from .morphodynamics import (
@@ -31,5 +32,7 @@ from .sediment_transport import (
     van_rijn_suspended,
     bijker_bedload,
     bagnold_sediment,
-    cerc_transport
+    cerc_transport,
+    einstein_bedload,
+    izbash_current   
 )
