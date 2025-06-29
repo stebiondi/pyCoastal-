@@ -41,3 +41,17 @@ def bijker_bedload(tau_wave: float, tau_current: float, rho_s: float, rho: float
     tau_total = tau_wave + tau_current
     return math.sqrt(tau_total / ((rho_s - rho) * g * d50))
 
+def cerc_transport(Eb: float, angle: float, K: float = 0.39, rho: float = 1025, g: float = 9.81) -> float:
+    """
+    CERC longshore transport rate:
+    Q = K * Eb/(ρg) * sinφb cosφb
+    """
+    return K * Eb / (rho * g) * np.sin(angle) * np.cos(angle)
+
+def bagnold_sediment(H: float, c: float, rho_s: float, rho: float = 1025) -> float:
+    """
+    Bagnold’s load estimate: qs ∝ (ρs/ρ) * wave power.
+    Simplified form here for energy-driven sediment transport.
+    """
+    return (rho_s / rho) * H**2 * c
+
