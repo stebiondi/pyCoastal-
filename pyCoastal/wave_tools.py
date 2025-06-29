@@ -99,3 +99,11 @@ def ursell_number(H: float, T: float, h: float) -> tuple:
     else:
         interp = f"U = {U:.1f}: Nonlinear regime; use Stokes/Boussinesq or higher."
     return U, interp
+
+def wave_setup(Hb: float, gamma: float = 0.8) -> float:
+    """
+    Estimate mean water level increase at shoreline due to wave setup.
+    η = (5/16) * γ * Hb
+    """
+    return 5/16 * gamma * Hb
+
