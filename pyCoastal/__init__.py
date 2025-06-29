@@ -14,7 +14,9 @@ from .wave_tools import (
 from .structure import (
     hudson_dn50,
     vandermeer_dn50,
-    goda_wave_force
+    goda_wave_force,
+    hunt_runup,
+    stockdon_runup
 )
 
 from .morphodynamics import (
