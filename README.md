@@ -11,7 +11,7 @@ Clone the repository and navigate to the main folder
 git clone https://github.com/stebiondi/pyCoastal.git
 cd pyCoastal
 ```
-# 2. (Optional) Create a virtual environment for clean dependencies
+# (Optional) Create a virtual environment for clean dependencies
 ```bash
 python -m venv venv
 ```
