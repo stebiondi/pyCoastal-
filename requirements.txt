@@ -1,1 +1,3 @@
-numpy
+import { numpy
+          sys
+          }
