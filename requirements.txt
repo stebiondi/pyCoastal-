@@ -1,1 +1,19 @@
-numpy
+# Fundamental numerics and array handling
+numpy>=1.21          # array operations, gradients, linear algebra :contentReference[oaicite:0]{index=0}
+
+# Plotting (used in examples and potential diagnostics)
+matplotlib>=3.4      # 2D/3D plotting, colormaps :contentReference[oaicite:1]{index=1}
+
+# Configuration parsing (YAML input files, JSON/INI if needed)
+PyYAML>=5.4          # YAML file parsing :contentReference[oaicite:2]{index=2}
+
+# Data I/O utilities
+pandas>=1.3          # tabular CSV reading/writing :contentReference[oaicite:3]{index=3}
+meshio>=5.3          # mesh file I/O for domain definitions :contentReference[oaicite:4]{index=4}
+vtk>=9.0             # VTK file support for scientific visualization :contentReference[oaicite:5]{index=5}
+
+# Testing & quality
+pytest>=6.0          # unit and integration testing :contentReference[oaicite:6]{index=6}
+
+# Documentation
+Sphinx>=4.0          # docs generation (in docs/) :contentReference[oaicite:7]{index=7}

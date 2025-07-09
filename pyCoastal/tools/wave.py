@@ -1,4 +1,4 @@
-# wave_tools.py
+# wave.py
 
 import numpy as np
 
@@ -107,3 +107,92 @@ def wave_setup(Hb: float, gamma: float = 0.8) -> float:
     """
     return 5/16 * gamma * Hb
 
+def _pm_spectrum(f: np.ndarray, Tp: float, g: float = 9.81) -> np.ndarray:
+    """
+    Pierson–Moskowitz spectral density S(f) for a fully developed sea:
+      S(f) = α g^2 / (2π)^4 f^{-5} exp[-5/4 (f_p/f)^4]
+    where f_p = 1/Tp, α = 0.0081
+
+    Args:
+        f: 1D array of frequencies (Hz)
+        Tp: peak period (s)
+        g: gravity (m/s²)
+    Returns:
+        S: spectral density [m²/Hz]
+    """
+    α = 0.0081
+    fp = 1.0 / Tp
+    S = (α * g**2 / (2 * np.pi)**4) * f**(-5) * np.exp(-1.25 * (fp / f)**4)
+    return S
+
+def _jonswap_spectrum(
+    f: np.ndarray,
+    Tp: float,
+    Hs: float,
+    gamma: float = 3.3,
+    g: float = 9.81
+) -> np.ndarray:
+    """
+    JONSWAP spectral density S(f):
+      S(f) = S_pm(f) * gamma^exp[- (f - fp)^2 / (2 * sigma^2 * fp^2)]
+    with sigma=0.07 for f<=fp, else 0.09.
+    We also scale by Hs² to get correct variance.
+    """
+    fp = 1.0 / Tp
+    S_pm = _pm_spectrum(f, Tp, g)
+    sigma = np.where(f <= fp, 0.07, 0.09)
+    r = np.exp(- (f - fp)**2 / (2 * sigma**2 * fp**2))
+    S_j = S_pm * gamma**r
+
+    # normalize so that ∫2S df = Hs²/8
+    df = f[1] - f[0]
+    var = 2 * np.sum(S_j) * df
+    return S_j * (Hs**2 / (8 * var))
+
+
+def generate_irregular_wave(
+    Hs: float,
+    Tp: float,
+    duration: float,
+    dt: float,
+    spectrum: str = "pm",
+    gamma: float = 3.3
+) -> tuple[np.ndarray, np.ndarray]:
+    """
+    Generate one realization of an irregular wave time-series η(t).
+
+    Args:
+      Hs        : significant wave height [m]
+      Tp        : peak period               [s]
+      duration  : total record length       [s]
+      dt        : time step                 [s]
+      spectrum  : 'pm' or 'jonswap'
+      gamma     : peak enhancement factor (JONSWAP only)
+
+    Returns:
+      t   : time array of length N = ceil(duration/dt)
+      eta : η(t) time-series
+    """
+    N = int(np.ceil(duration / dt))
+    t = np.arange(N) * dt
+    df = 1.0 / duration
+    f = np.arange(1, N//2 + 1) * df
+
+    if spectrum.lower() == "pm":
+        S = _pm_spectrum(f, Tp)
+        # scale to Hs
+        var_pm = 2 * np.sum(S) * df
+        S *= (Hs**2 / (8 * var_pm))
+    elif spectrum.lower() == "jonswap":
+        S = _jonswap_spectrum(f, Tp, Hs, gamma)
+    else:
+        raise ValueError("`spectrum` must be 'pm' or 'jonswap'")
+
+    phases     = np.random.uniform(0, 2*np.pi, size=f.shape)
+    amplitudes = np.sqrt(2 * S * df)
+
+    eta = np.zeros_like(t)
+    for A, fi, phi in zip(amplitudes, f, phases):
+        eta += A * np.cos(2*np.pi*fi*t + phi)
+
+    return t, eta

@@ -1,64 +1,18 @@
 """
-pycoastal - A Python toolkit for coastal engineering computations.
-Stefano Biondi, UF
+pyCoastal: A modular coastal‐process modeling framework.
+
+Subpackages
+-----------
+config   Input‐file parsing (YAML/JSON/INI)
+domain   Mesh & geometry definitions (1D/2D/3D)
+numerics Numerical infrastructure (grids, schemes, solvers)
+physics  Governing equations & closures
+tools    Standalone formulae & utilities
+boundary Boundary‐condition classes
+io       I/O for VTK, CSV, NetCDF, etc.
 """
-import sys
-import inspect
-import pyCoastal
 
-def __getattr__(name):
-    # If they tried to access a function that doesn't exist:
-    # Build a categorized list of all available callables
-    groups = {
-        "Wave Tools": pyCoastal.wave_tools,
-        "Structure": pyCoastal.structural,
-        "Morphodynamics": pyCoastal.morphodynamics,
-        "Sediment Transport": pyCoastal.sediment_transport,
-    }
+__version__ = "0.1.0"
 
-    available = []
-    for grp, mod in groups.items():
-        funcs = [f for f, obj in inspect.getmembers(mod, inspect.isfunction)]
-        if funcs:
-            available.append(f"\n{grp}:\n  " + "\n  ".join(funcs))
-
-    message = (
-        f"'{name}' not found in pyCoastal. Available functions:" +
-        "".join(available) +
-        "\n\nUse cs.<function_name>(...) to call."
-    )
-    raise AttributeError(message)
-    
-from .wave_tools import (
-    dispersion,
-    wave_number,
-    surf_similarity,
-    breaker_type,
-    ursell_number,
-    wave_setup
-)
-
-from .structural import (
-    hudson_dn50,
-    vandermeer_dn50,
-    goda_wave_force,
-    hunt_runup,
-    stockdon_runup,
-    iribarren_stability
-)
-
-from .morphodynamics import (
-    bruuns_rule,
-    exner_change
-)
-
-from .sediment_transport import (
-    shields_parameter,
-    van_rijn_bedload,
-    van_rijn_suspended,
-    bijker_bedload,
-    bagnold_sediment,
-    cerc_transport,
-    einstein_bedload,
-    izbash_current   
-)
+# expose the two I/O entrypoints:
+from .io import read_data, write_vtk

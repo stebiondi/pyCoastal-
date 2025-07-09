@@ -1,6 +1,7 @@
 # sediment_transport.py
 
 import math
+import numpy as np
 
 def shields_parameter(tau_b: float, rho_s: float, rho: float, d: float, g: float = 9.81) -> float:
     """
@@ -61,7 +62,7 @@ def izbash_current(rho_s: float, rho: float, d: float, g: float = 9.81) -> float
       u_c = 1.7 * sqrt[Δ g d]
     """
     Delta = (rho_s - rho) / rho
-    return 1.7 * sqrt(Delta * g * d)
+    return 1.7 * math.sqrt(Delta * g * d)
 
 def einstein_bedload(tau_star: float, d: float, s: float, g: float = 9.81) -> float:
     """
@@ -69,5 +70,5 @@ def einstein_bedload(tau_star: float, d: float, s: float, g: float = 9.81) -> fl
       q_b = 8 √[g (s − 1) d^3] * τ*^1.5
     Useful for fine sand transport upstream.
     """
-    return 8 * sqrt(g * (s - 1) * d**3) * tau_star**1.5
+    return 8 * math.sqrt(g * (s - 1) * d**3) * tau_star**1.5
 

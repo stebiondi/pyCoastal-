@@ -1,7 +1,7 @@
-# structure.py
-
+# structural.py
+import numpy as np
 import math
-from .wave_tools import surf_similarity
+from .wave import surf_similarity
 
 def hudson_dn50(Hs: float, Delta: float, theta: float, Kd: float = 3.0) -> float:
     """
