@@ -11,20 +11,6 @@ Licensed under the MIT License. See LICENSE file for details.
 git clone https://github.com/stebiondi/pyCoastal.git
 cd pyCoastal
 ```
-# (Optional) Create a virtual environment for clean dependencies
-```bash
-python -m venv venv
-```
-# Activate it:
-On Windows PowerShell:
-```bash
-venv\Scripts\Activate.ps1
-```
-On Linux/macOS:
-
-```bash
-source venv/bin/activate
-```
 
 # Install build tools
 ```bash
