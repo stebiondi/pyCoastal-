@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read        # needed for checkout
-      id-token: write       # needed for OIDC PyPI publish
+      contents: read        
+      id-token: write       
     steps:
       - uses: actions/checkout@v4
         with:
