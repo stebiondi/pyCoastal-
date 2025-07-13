@@ -22,12 +22,6 @@ pip install --upgrade pip setuptools wheel build
 python -m build
 ```
 
-# (Optional) Check your distribution packages
-```bash
-pip install twine
-twine check dist/*
-```
-
 # Install pyCoastal in editable (dev) mode
 ```bash
 pip install -e 
