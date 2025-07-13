@@ -27,16 +27,6 @@ python -m build
 pip install -e 
 ```
 
-# Test it in a Python session:
-```bash
-python - <<EOF
-import pyCoastal as cs
-print(cs.dispersion(T=8, h=5))
-EOF
-```
-
-# or soon available:
-
 # Install via pip:
 
 ```bash
