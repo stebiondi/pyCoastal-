@@ -12,9 +12,11 @@ pip install pyCoastal
 ```
 # Or clone and Install in editable mode
 
+```bash
 git clone https://github.com/stebiondi/pyCoastal.git
 cd pyCoastal
 pip install -e .
+```
 
 # Citation
 
