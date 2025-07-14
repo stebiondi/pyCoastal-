@@ -5,30 +5,24 @@ A Python module for Coastal Engineering calculations.
 Copyright (c) 2025 Stefano Biondi
 Licensed under the MIT License. See LICENSE file for details.
 
-# Installation
-# Clone the repository and navigate to the main folder
-```bash
-git clone https://github.com/stebiondi/pyCoastal.git
-cd pyCoastal
-```
-
-# Install build tools
-```bash
-pip install --upgrade pip setuptools wheel build
-```
-
-# Build your package (creates dist/ folder)
-```bash
-python -m build
-```
-
-# Install pyCoastal in editable (dev) mode
-```bash
-pip install -e 
-```
-
 # Install via pip:
 
 ```bash
 pip install pyCoastal
 ```
+# Or clone and Install in editable mode
+
+git clone https://github.com/stebiondi/pyCoastal.git
+cd pyCoastal
+pip install -e .
+
+# Citation
+
+if you are using the Software in a scientific publication please cite:
+
+@software{pyCoastal2025,
+  author = {Biondi, Stefano},
+  title = {pyCoastal: Modular Coastal Process Modeling in Python},
+  year = {2025},
+  url = {https://github.com/stebiondi/pyCoastal},
+}
