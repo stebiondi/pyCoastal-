@@ -28,13 +28,22 @@ circular wave propagation from a central disturbance:
 </p>
 
 
-# Citation
+### 📚 Citation
 
-if you are using the Software in a scientific publication please cite:
+If you use **pyCoastal** in a scientific publication, please cite:
 
+> **Biondi, S.** (2025)  
+> _pyCoastal: Modular Coastal Process Modeling in Python_  
+> GitHub: [https://github.com/stebiondi/pyCoastal](https://github.com/stebiondi/pyCoastal)  
+> Version: v0.1.1  
+
+You can also use this BibTeX entry:
+
+```bibtex
 @software{pyCoastal2025,
-  author = {Biondi, Stefano},
-  title = {pyCoastal: Modular Coastal Process Modeling in Python},
-  year = {2025},
-  url = {https://github.com/stebiondi/pyCoastal},
+  author  = {Biondi, Stefano},
+  title   = {{pyCoastal}: Modular Coastal Process Modeling in Python},
+  year    = {2025},
+  url     = {https://github.com/stebiondi/pyCoastal},
+  version = {v0.1.1}
 }
