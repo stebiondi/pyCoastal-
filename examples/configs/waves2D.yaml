@@ -1,0 +1,21 @@
+grid:
+  nx: 100
+  ny: 100
+  dx: 0.1
+  dy: 0.1
+
+physics:
+  gravity: 9.81
+  depth: 5.0
+
+forcing:
+  amplitude: 0.2
+  period: 2.3
+
+solver:
+  cfl: 1.0
+  t_final: 20.0
+
+output:
+  obs_points:
+    - [20, 50]

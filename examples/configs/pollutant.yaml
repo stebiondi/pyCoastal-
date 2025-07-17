@@ -1,0 +1,14 @@
+grid:
+  Lx: 2.0          # pond length [m]
+  Ly: 1.0          # pond width [m]
+  Nx: 200
+  Ny: 100
+
+physics:
+  diffusivity: 0.001   # D [m²/s]
+  U0: 0.2              # max velocity [m/s]
+  R: 0.4               # vortex radius [m]
+
+solver:
+  t_final: 5.0
+  c0_sigma: 0.05       # initial Gaussian width [m]

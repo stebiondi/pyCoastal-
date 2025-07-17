@@ -1,0 +1,15 @@
+grid:
+  nx: 200
+  ny: 200
+  dx: 1.0
+  dy: 1.0
+
+physics:
+  speed: 1.0         # current speed (m/s)
+
+solver:
+  cfl: 0.5
+  t_final: 500.0
+
+output:
+  gauge: [100, 100]

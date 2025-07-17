@@ -1,0 +1,13 @@
+grid:
+  Nx: 200
+  Ny: 200
+  Lx: 2.0
+  Ly: 2.0
+
+physics:
+  wave_speed: 1.0
+  sigma: 0.1
+
+solver:
+  CFL: 0.5
+  t_final: 4.0

@@ -1,0 +1,22 @@
+grid:
+  nx: 200
+  ny: 200
+  dx: 1.0
+  dy: 1.0
+
+physics:
+  gravity: 9.81
+  depth: 5.0
+
+forcing:
+  type: jonswap   # options: pm or jonswap
+  gamma: 3.3
+  Hs: 0.5         # significant wave height (m)
+  Tp: 3.0         # peak period (s)
+
+solver:
+  dt: 0.1
+  duration: 60.0
+
+output:
+  gauge: [100, 100]  # grid indices (i, j)

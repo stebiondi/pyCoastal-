@@ -1,96 +1,97 @@
+#!/usr/bin/env python3
 """
 viscous_fluid.py
 
-A simple 2D incompressible Navier–Stokes solver (projection omitted) demonstrating
-the roll-up and advection of a pair of counter-rotating vortices in a uniform grid.
-
-• Governing equations (no pressure solve):
-    u_t + (u·∇)u = ν ∇²u
-    v_t + (u·∇)v = ν ∇²v
-
-• Spatial discretization: second-order central differences for convection and diffusion
-• Time stepping: forward (explicit) Euler
-• Boundary conditions: free-slip (zero normal velocity) on all four sides
-• Initial condition: two Gaussian vortices of opposite sign
-• Visualization: real-time animation of vorticity field
-
-This demo illustrates the basic mechanisms of vortex interaction and viscous diffusion
-on a Cartesian mesh and can be extended with pressure projection, buoyancy forcing,
-or more advanced time‐integration schemes.
+2D incompressible Navier–Stokes simulation with:
+- Two counter-rotating vortices
+- Central-difference convection and diffusion
+- Forward Euler time integration
+- Periodic boundary conditions
+- Real-time animation of speed field
 """
 
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-from pyCoastal.numerics.grid          import UniformGrid
-from pyCoastal.physics.navier_stokes  import initialize_state, rhs
-from pyCoastal.numerics.boundary               import BoundaryManager
+from pyCoastal.io import read_data
+from pyCoastal.numerics.grid import UniformGrid
+from pyCoastal.numerics.boundary import BoundaryManager
+from pyCoastal.physics.navier_stokes import initialize_state, rhs
 
 def main():
-    # 1) Build a periodic grid
-    Nx, Ny = 100, 100
-    Lx, Ly = 2.0, 2.0
-    dx, dy = Lx/(Nx-1), Ly/(Ny-1)
-    grid   = UniformGrid((Nx, Ny), (dx, dy))
-    X, Y   = grid.Xc
+    # --------------------------------------------------------------
+    # 1) Load configuration
+    # --------------------------------------------------------------
+    cfg = read_data("../configs/viscous_fluid.yaml")
 
-    # 2) Create a dummy BC manager (no BCs → periodic!)
-    bc_mgr = BoundaryManager()
+    Nx = cfg["grid"]["Nx"]
+    Ny = cfg["grid"]["Ny"]
+    Lx = cfg["grid"]["Lx"]
+    Ly = cfg["grid"]["Ly"]
+    dx, dy = Lx / (Nx - 1), Ly / (Ny - 1)
+    grid = UniformGrid((Nx, Ny), (dx, dy))
+    X, Y = grid.Xc
 
-    # 3) Initialize state and superimpose a uniform U0 flow
-    U0 = 1.5   # background advection speed
+    ν     = cfg["physics"]["viscosity"]
+    U0    = cfg["physics"]["background_speed"]
+    sigma = cfg["physics"]["vortex_sigma"]
+
+    dt      = cfg["solver"]["dt"]
+    t_final = cfg["solver"]["t_final"]
+    nt      = int(t_final / dt)
+
+    # --------------------------------------------------------------
+    # 2) Initial state: uniform + vortex perturbation
+    # --------------------------------------------------------------
+    bc_mgr = BoundaryManager()  # periodic
     state = initialize_state(grid)
     state["u"] += U0
 
-    # 4) Add a small Gaussian vortex perturbation in the center
-    xc, yc = Lx/2, Ly/2
-    sigma  = 0.2
-    r2 = (X - xc)**2 + (Y - yc)**2
-    vortex = np.exp(-r2/sigma**2)
-    # swirl about center:
-    state["u"] +=  -(Y - yc)*vortex
-    state["v"] +=   (X - xc)*vortex
+    xc, yc = Lx / 2, Ly / 2
+    r2 = (X - xc) ** 2 + (Y - yc) ** 2
+    vortex = np.exp(-r2 / sigma ** 2)
+    state["u"] += -(Y - yc) * vortex
+    state["v"] +=  (X - xc) * vortex
 
-    # 5) Time‐step parameters
-    ν  = 1e-3    # viscosity
-    dt = 0.001   # Δt
-    T  = 4.0     # total sim time
-    nt = int(T/dt)
-
-    # 6) Set up the plot
+    # --------------------------------------------------------------
+    # 3) Plot setup
+    # --------------------------------------------------------------
     fig, ax = plt.subplots()
     speed = np.sqrt(state["u"]**2 + state["v"]**2)
-    pcm   = ax.pcolormesh(X, Y, speed, cmap='inferno', shading='auto')
+    pcm = ax.pcolormesh(X, Y, speed, cmap="inferno", shading="auto")
     fig.colorbar(pcm, ax=ax, label="speed")
     ax.set_aspect("equal")
-    txt = ax.set_title("t = 0.00")
+    title = ax.set_title("t = 0.00 s")
 
-    # 7) Time‐stepping / animation callback
+    # --------------------------------------------------------------
+    # 4) Update function
+    # --------------------------------------------------------------
     def update(frame):
         nonlocal state
-        t = frame*dt
+        t = frame * dt
 
-        # (a) compute RHS (conv + diff)
+        # RHS from convection + diffusion
         R = rhs(state, t, grid, bc_mgr, ν=ν)
 
-        # (b) advance with forward Euler
+        # Forward Euler step
         state["u"] += dt * R["u"]
         state["v"] += dt * R["v"]
 
-        # (c) add background drift back in (so U0 stays constant)
+        # Enforce mean U0 drift (prevent bulk slowing)
         state["u"] -= (state["u"].mean() - U0)
 
-        # (d) update plot
-        s = np.sqrt(state["u"]**2 + state["v"]**2)
-        pcm.set_array(s.ravel())
-        txt.set_text(f"t = {t:.2f}")
-        return [pcm, txt]
+        # Update plot
+        speed = np.sqrt(state["u"]**2 + state["v"]**2)
+        pcm.set_array(speed.ravel())
+        title.set_text(f"t = {t:.2f} s")
+        return [pcm, title]
 
     ani = animation.FuncAnimation(
         fig, update, frames=nt, interval=30, blit=True, repeat=False
     )
+    plt.tight_layout()
     plt.show()
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()

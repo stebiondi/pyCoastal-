@@ -1,0 +1,14 @@
+grid:
+  Nx: 100
+  Ny: 100
+  Lx: 2.0
+  Ly: 2.0
+
+physics:
+  viscosity: 0.001
+  background_speed: 1.5
+  vortex_sigma: 0.2
+
+solver:
+  dt: 0.001
+  t_final: 4.0
