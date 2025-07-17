@@ -22,9 +22,9 @@ from pyCoastal.numerics.operators import laplacian
 # -------------------------------------------------------------------
 c       = 1.0        # wave speed
 Lx, Ly  = 2.0, 2.0   # domain size [m]
-Nx, Ny  = 200, 200   # grid resolution
+Nx, Ny  = 500, 500  # grid resolution
 dx, dy  = Lx/Nx, Ly/Ny
-CFL     = 0.7        # for stability must have c*dt/dx < 1/√2 in 2D
+CFL     = 0.5        # for stability must have c*dt/dx < 1/√2 in 2D
 dt      = CFL * min(dx,dy) / c
 t_final = 4.0        # seconds
 nt      = int(t_final/dt)
