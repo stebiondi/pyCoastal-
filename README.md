@@ -17,6 +17,16 @@ git clone https://github.com/stebiondi/pyCoastal.git
 cd pyCoastal
 pip install -e .
 ```
+---
+
+##  Simulation Preview
+
+circular wave propagation from a central disturbance:
+
+<p align="center">
+  <img src="media/water_drop.gif" alt="2D Wave Animation" width="600">
+</p>
+
 
 # Citation
 
