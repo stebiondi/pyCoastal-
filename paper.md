@@ -69,17 +69,13 @@ This example demonstrates the classic 2D linear wave equation:
 \]
 
 Using `water_drop.py`, this simulation showcases:
-
-- **Zero-Dirichlet boundary conditions** on all domain edges, ensuring waves vanish at the boundaries.
-- A **Gaussian hump** as the initial condition, representing a localized disturbance ("water drop") at the domain center.
-- A **second-order finite-difference scheme** in both space and time:
+Zero-Dirichlet boundary conditions** on all domain edges, ensuring waves vanish at the boundaries, a Gaussian hump as the initial condition, representing a localized disturbance ("water drop") at the domain center, and a second-order finite-difference scheme in both space and time:
   
   \[
   \eta_{\text{new}} = 2\eta - \eta_{\text{old}} + (c\,\Delta t)^2 \nabla^2 \eta
   \]
   
-- Real-time animation using `matplotlib.animation.FuncAnimation`, allowing users to visually observe expanding circular wavefronts and their reflections.
-- Fully configurable via **YAML**, enabling easy adjustment of domain size, resolution, wave speed, CFL number, and simulation duration without modifying the code.
+The output provides real-time animation using `matplotlib.animation.FuncAnimation`, allowing users to visually observe expanding circular wavefronts and their reflections. Additionally, it is fully configurable via YAML, enabling easy adjustment of domain size, resolution, wave speed, CFL number, and simulation duration without modifying the code.
 
 #### Run the Example
 
