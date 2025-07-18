@@ -33,7 +33,7 @@ circular wave propagation from a central disturbance:
 If you use **pyCoastal** in a scientific publication, please cite:
 
 > **Biondi, S.** (2025)  
-> _pyCoastal: Modular Coastal Process Modeling in Python_  
+> _pyCoastal: a Python package for Coastal Engineering_  
 > GitHub: [https://github.com/stebiondi/pyCoastal](https://github.com/stebiondi/pyCoastal)  
 > Version: v0.1.1  
 
