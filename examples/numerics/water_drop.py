@@ -92,3 +92,12 @@ ani = animation.FuncAnimation(
 
 plt.tight_layout()
 plt.show()
+
+# Save the image of the central timestep
+central_frame = nt // 2
+for frame in range(central_frame):
+    update(frame)
+plt.imsave("water_drop_central.png", eta, cmap="RdBu_r", vmin=-0.5, vmax=0.5)
+
+# Save the whole plot with coordinates
+fig.savefig("water_drop_central_plot.png")
